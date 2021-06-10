@@ -1,10 +1,11 @@
+import { gray } from "../../../../../elements/colorSchema";
 import fabric from "../../../../../modules/fabric";
 import { createEdge, moveEdge } from "./edge";
 
 export const createNode = (canvas, { id, title }) => {
   const circle = new fabric.Circle({
     radius: 30,
-    fill: "gray",
+    fill: gray,
     originX: "center",
     originY: "center",
   });
@@ -28,8 +29,10 @@ export const createNode = (canvas, { id, title }) => {
   grp
     .on("selected", function (e) {
       canvas.fire("custom:update", e.target);
+      canvas.fire("node:selection", e.target);
     })
     .on("deselected", function (e) {
+      canvas.fire("node:deselection", e.target);
       canvas.fire("custom:deselection", e.target);
     })
     .on("scaling", function (e) {
@@ -61,6 +64,10 @@ export const updateNodeData = (canvas, data = {}) => {
       node2.incomingEdges.push({ nodeId: node.id, line: edge });
       canvas.fire("custom:update", node);
       canvas.add(edge).sendToBack(edge).renderAll();
+      return;
+    case "selected":
+      node.item(0).set({ fill: data.selected ? "red" : gray });
+      canvas.renderAll();
       return;
     default:
       console.log("tf u doing");

@@ -21,7 +21,13 @@ const CanvasStore = createContainer(() => {
           prevState ? { ...prevState, ...option } : option
         )
       );
+      canvas.on("node:selection", (option) =>
+        updateNodeData(canvas, { selected: true, node: option })
+      );
       canvas.on("custom:deselection", () => setSelected(null));
+      canvas.on("node:deselection", (option) =>
+        updateNodeData(canvas, { selected: false, node: option })
+      );
       canvas.on("node:moving", (option) =>
         updateNodeData(canvas, { move: true, node: option })
       );

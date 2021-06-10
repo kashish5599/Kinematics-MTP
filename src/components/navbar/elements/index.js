@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { grayBorder } from "../../../elements/colorSchema";
 import { hFlex } from "../../../elements/helpers";
 
 export const NavbarEl = styled.div`
@@ -7,4 +8,5 @@ export const NavbarEl = styled.div`
   padding: 1em;
   width: 100%;
   justify-content: flex-start;
+  border-bottom: 1px solid ${grayBorder};
 `;

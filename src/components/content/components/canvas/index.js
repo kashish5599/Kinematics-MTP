@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { lightGray } from "../../../../elements/colorSchema";
 import CanvasStore from "../../../../stores/canvasStore";
 import { CanvasEl } from "../../elements";
 
@@ -13,7 +14,7 @@ function Canvas() {
     initCanvas(canvasRef, "main-canvas", {
       width: canvasContainer.current.clientWidth,
       height: canvasContainer.current.clientHeight,
-      backgroundColor: "lightgray",
+      backgroundColor: lightGray,
       preserveObjectStacking: true,
     });
   }, [initCanvas]);
