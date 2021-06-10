@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Kinematics-MTP/static/css/main.bfefb462.chunk.css",
+    "main.js": "/Kinematics-MTP/static/js/main.2acbb5d1.chunk.js",
+    "main.js.map": "/Kinematics-MTP/static/js/main.2acbb5d1.chunk.js.map",
+    "runtime-main.js": "/Kinematics-MTP/static/js/runtime-main.c06bad7e.js",
+    "runtime-main.js.map": "/Kinematics-MTP/static/js/runtime-main.c06bad7e.js.map",
+    "static/js/2.26c6f569.chunk.js": "/Kinematics-MTP/static/js/2.26c6f569.chunk.js",
+    "static/js/2.26c6f569.chunk.js.map": "/Kinematics-MTP/static/js/2.26c6f569.chunk.js.map",
+    "static/js/3.1b5d8a83.chunk.js": "/Kinematics-MTP/static/js/3.1b5d8a83.chunk.js",
+    "static/js/3.1b5d8a83.chunk.js.map": "/Kinematics-MTP/static/js/3.1b5d8a83.chunk.js.map",
+    "index.html": "/Kinematics-MTP/index.html",
+    "static/css/main.bfefb462.chunk.css.map": "/Kinematics-MTP/static/css/main.bfefb462.chunk.css.map",
+    "static/js/2.26c6f569.chunk.js.LICENSE.txt": "/Kinematics-MTP/static/js/2.26c6f569.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c06bad7e.js",
+    "static/js/2.26c6f569.chunk.js",
+    "static/css/main.bfefb462.chunk.css",
+    "static/js/main.2acbb5d1.chunk.js"
+  ]
+}
