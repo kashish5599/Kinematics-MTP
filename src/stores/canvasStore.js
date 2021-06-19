@@ -46,7 +46,7 @@ const CanvasStore = createContainer(() => {
       if (canvas) {
         const newNode = createNode(canvas, {
           id: `node-${canvasState.nodeCount + 1}`,
-          title: canvasState.nodeCount + 1,
+          title: options?.title || canvasState.nodeCount + 1,
         });
 
         canvas.add(newNode).setActiveObject(newNode);
@@ -55,6 +55,7 @@ const CanvasStore = createContainer(() => {
           nodeCount: canvasState.nodeCount + 1,
         });
       }
+      return;
     },
     [canvas, canvasState, setCanvasState]
   );
@@ -69,7 +70,50 @@ const CanvasStore = createContainer(() => {
     [canvas]
   );
 
-  const addEdge = useCallback((data) => console.log(data), []);
+  const addEdge = useCallback(
+    (parent, target) => {
+      updateNode({ edge: target, node: parent });
+    },
+    [updateNode]
+  );
+
+  const addGraph = useCallback(
+    (type, graph = []) => {
+      if (type === "ADJMAT") {
+        const prevNodeCount = canvas.getObjects("node").length;
+        let nodes = [];
+
+        [...Array(graph.length)].forEach((_, i) => {
+          const newNode = createNode(canvas, {
+            id: `node-${prevNodeCount + i + 1}`,
+            title: prevNodeCount + i + 1,
+          });
+
+          canvas.add(newNode);
+          nodes.push(newNode);
+        });
+        setCanvasState((prevState) => ({
+          ...prevState,
+          nodeCount: prevState?.nodeCount
+            ? prevState?.nodeCount + graph.length
+            : graph.length,
+        }));
+
+        graph.forEach((r, i) => {
+          const curNode = nodes[i];
+          r.forEach((el, j) => {
+            if (el !== "0" && i !== j) {
+              addEdge(curNode, nodes[j].id);
+            }
+          });
+        });
+        setSelected(null);
+      } else {
+        console.log("Jld hi");
+      }
+    },
+    [canvas, addEdge]
+  );
 
   return {
     canvas,
@@ -82,6 +126,8 @@ const CanvasStore = createContainer(() => {
     setCanvasState,
     updateNode,
     addEdge,
+    setSelected,
+    addGraph,
   };
 });
 

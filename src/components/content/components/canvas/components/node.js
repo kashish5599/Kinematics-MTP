@@ -1,10 +1,14 @@
 import { gray } from "../../../../../elements/colorSchema";
+import { getRandomNumberInterval } from "../../../../../helpers/misc";
 import fabric from "../../../../../modules/fabric";
 import { createEdge, moveEdge } from "./edge";
 
 export const createNode = (canvas, { id, title }) => {
+  const canvasBoundaries = canvas.vptCoords.br;
+  const radius = 30;
+
   const circle = new fabric.Circle({
-    radius: 30,
+    radius: radius,
     fill: gray,
     originX: "center",
     originY: "center",
@@ -16,8 +20,8 @@ export const createNode = (canvas, { id, title }) => {
   });
 
   const grp = new fabric.Group([circle, text], {
-    left: 150,
-    top: 150,
+    left: getRandomNumberInterval(radius, canvasBoundaries.x - radius),
+    top: getRandomNumberInterval(radius, canvasBoundaries.y - radius),
     type: "node",
     id,
     text: title,

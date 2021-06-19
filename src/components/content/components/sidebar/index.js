@@ -1,6 +1,7 @@
 import React from "react";
 import CanvasStore from "../../../../stores/canvasStore";
 import { SidebarEl } from "../../elements";
+import GraphOptions from "./components/graphOptions";
 import NodeOptions from "./components/nodeOptions";
 
 function Sidebar() {
@@ -13,6 +14,8 @@ function Sidebar() {
             switch (selected.type) {
               case "node":
                 return <NodeOptions />;
+              case "graph":
+                return <GraphOptions />;
               default:
                 return <div>Error</div>;
             }

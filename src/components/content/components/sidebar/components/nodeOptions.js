@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CanvasStore from "../../../../../stores/canvasStore";
 
 function NodeOptions() {
-  const { canvas, updateNode, selected } = CanvasStore.useContainer();
+  const { canvas, updateNode, selected, addEdge } = CanvasStore.useContainer();
   const [nodeState, setNodeState] = useState(selected);
   const [otherNodes, setOtherNodes] = useState([]);
 
@@ -49,10 +49,7 @@ function NodeOptions() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            updateNode({
-              [e.target.getElementsByTagName("select")[0].name]:
-                e.target.getElementsByTagName("select")[0].value,
-            });
+            addEdge(selected, e.target.getElementsByTagName("select")[0].value);
           }}
         >
           <label htmlFor="edge">Add edge: </label>

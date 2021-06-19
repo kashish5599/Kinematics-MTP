@@ -19,3 +19,5 @@ export const SidebarEl = styled.div`
   height: 100%;
   justify-content: flex-start;
 `;
+
+export const GraphOptionsEl = styled.div``;

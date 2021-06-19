@@ -1,7 +1,7 @@
 import fabric from "../../../../../modules/fabric";
 
-export const createEdge = (canvas, { edge: childId }) => {
-  const p = canvas.getActiveObject();
+export const createEdge = (canvas, { edge: childId, node }) => {
+  const p = node;
   const c = canvas.getObjects().find(({ id }) => id === childId);
 
   const edge = new fabric.LineArrow([p.left, p.top, c.left, c.top], {
