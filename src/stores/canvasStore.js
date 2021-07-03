@@ -1,7 +1,11 @@
 import { useCallback, useState } from "react";
 import { createContainer } from "unstated-next";
 import fabric from "../modules/fabric";
-import { defaultNode, initCanvasState } from "../data/config";
+import {
+  defaultNode,
+  initCanvasState,
+  nodeUpdateOptions,
+} from "../data/config";
 import {
   createNode,
   updateNodeData,
@@ -70,9 +74,24 @@ const CanvasStore = createContainer(() => {
     [canvas]
   );
 
-  const addEdge = useCallback(
+  const addDirectedEdge = useCallback(
     (parent, target) => {
-      updateNode({ edge: target, node: parent });
+      updateNode({
+        edge: target,
+        node: parent,
+        type: nodeUpdateOptions.DIRECTED_EDGE,
+      });
+    },
+    [updateNode]
+  );
+
+  const addUndirectedEdge = useCallback(
+    (src, dest) => {
+      updateNode({
+        edge: dest,
+        node: src,
+        type: nodeUpdateOptions.UNDIRECTED_EDGE,
+      });
     },
     [updateNode]
   );
@@ -103,7 +122,7 @@ const CanvasStore = createContainer(() => {
           const curNode = nodes[i];
           r.forEach((el, j) => {
             if (el !== "0" && i !== j) {
-              addEdge(curNode, nodes[j].id);
+              addDirectedEdge(curNode, nodes[j].id);
             }
           });
         });
@@ -112,7 +131,7 @@ const CanvasStore = createContainer(() => {
         console.log("Jld hi");
       }
     },
-    [canvas, addEdge]
+    [canvas, addDirectedEdge]
   );
 
   return {
@@ -125,9 +144,10 @@ const CanvasStore = createContainer(() => {
     canvasState,
     setCanvasState,
     updateNode,
-    addEdge,
+    addDirectedEdge,
     setSelected,
     addGraph,
+    addUndirectedEdge,
   };
 });
 

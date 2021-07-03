@@ -63,9 +63,13 @@ export const updateNodeData = (canvas, data = {}) => {
       return;
     case "edge":
       const edge = createEdge(canvas, data);
-      node.edges.push({ nodeId: data.edge, line: edge });
+      node.edges.push({ nodeId: data.edge, type: data.type, line: edge });
       const node2 = canvas.getObjects().find(({ id }) => id === data.edge);
-      node2.incomingEdges.push({ nodeId: node.id, line: edge });
+      node2.incomingEdges.push({
+        nodeId: node.id,
+        type: data.type,
+        line: edge,
+      });
       canvas.fire("custom:update", node);
       canvas.add(edge).sendToBack(edge).renderAll();
       return;

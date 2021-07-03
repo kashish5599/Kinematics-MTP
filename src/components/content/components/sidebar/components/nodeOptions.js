@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { nodeUpdateOptions } from "../../../../../data/config";
 import CanvasStore from "../../../../../stores/canvasStore";
 
 function NodeOptions() {
-  const { canvas, updateNode, selected, addEdge } = CanvasStore.useContainer();
+  const { canvas, updateNode, selected, addUndirectedEdge } =
+    CanvasStore.useContainer();
   const [nodeState, setNodeState] = useState(selected);
   const [otherNodes, setOtherNodes] = useState([]);
 
@@ -24,7 +26,11 @@ function NodeOptions() {
           ({ id, type }) =>
             type === "node" &&
             id !== selected.id &&
-            !selected.edges.find(({ nodeId }) => nodeId === id)
+            !selected.edges.find(({ nodeId }) => nodeId === id) &&
+            !selected.incomingEdges.find(
+              ({ nodeId, type }) =>
+                type === nodeUpdateOptions.UNDIRECTED_EDGE && nodeId === id
+            )
         )
         .map(({ id }) => id)
     );
@@ -36,11 +42,24 @@ function NodeOptions() {
       <label htmlFor="text">Name:</label>
       <input value={nodeState.text} name="text" onChange={handleChange} />
       <h5>Edges:</h5>
-      {selected.edges.length > 0 ? (
+      {selected.edges.length > 0 ||
+      selected.incomingEdges.filter(
+        ({ type }) => type === nodeUpdateOptions.UNDIRECTED_EDGE
+      ).length > 0 ? (
         <ul>
           {selected.edges.map((edge) => (
-            <li key={edge.nodeId}>With {edge.nodeId}</li>
+            <li key={edge.nodeId}>
+              {edge.type} edge with {edge.nodeId}
+            </li>
           ))}
+          {selected.incomingEdges.map(
+            (edge) =>
+              edge.type === nodeUpdateOptions.UNDIRECTED_EDGE && (
+                <li key={edge.nodeId}>
+                  {edge.type} edge with {edge.nodeId}
+                </li>
+              )
+          )}
         </ul>
       ) : (
         <p>No edges for this node</p>
@@ -49,7 +68,10 @@ function NodeOptions() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addEdge(selected, e.target.getElementsByTagName("select")[0].value);
+            addUndirectedEdge(
+              selected,
+              e.target.getElementsByTagName("select")[0].value
+            );
           }}
         >
           <label htmlFor="edge">Add edge: </label>
