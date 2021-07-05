@@ -10,6 +10,7 @@ import {
   createNode,
   updateNodeData,
 } from "../components/content/components/canvas/components/node";
+import { fundamentalMatrix } from "../helpers/graph";
 
 const CanvasStore = createContainer(() => {
   const [canvas, setCanvas] = useState(null);
@@ -134,6 +135,10 @@ const CanvasStore = createContainer(() => {
     [canvas, addDirectedEdge]
   );
 
+  const getFundamentalMatrix = useCallback(() => {
+    return fundamentalMatrix(canvas);
+  }, [canvas]);
+
   return {
     canvas,
     initCanvas,
@@ -148,6 +153,7 @@ const CanvasStore = createContainer(() => {
     setSelected,
     addGraph,
     addUndirectedEdge,
+    getFundamentalMatrix,
   };
 });
 

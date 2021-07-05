@@ -2,6 +2,7 @@ import React from "react";
 import CanvasStore from "../../../../stores/canvasStore";
 import { SidebarEl } from "../../elements";
 import GraphOptions from "./components/graphOptions";
+import GraphProperties from "./components/graphProperties";
 import NodeOptions from "./components/nodeOptions";
 
 function Sidebar() {
@@ -16,6 +17,8 @@ function Sidebar() {
                 return <NodeOptions />;
               case "graph":
                 return <GraphOptions />;
+              case "graph-properties":
+                return <GraphProperties />;
               default:
                 return <div>Error</div>;
             }

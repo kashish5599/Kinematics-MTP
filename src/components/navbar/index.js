@@ -10,7 +10,7 @@ function Navbar() {
         onClick={() =>
           isCanvasActive ? addNode() : console.log("Canvas not loaded")
         }
-        className="sidebar-btn"
+        className="navbar-btn"
         disabled={!isCanvasActive}
       >
         Add Node
@@ -21,10 +21,16 @@ function Navbar() {
             ? setSelected({ type: "graph" })
             : console.log("Canvas not loaded")
         }
-        className="sidebar-btn"
+        className="navbar-btn"
         disabled={!isCanvasActive}
       >
         Add Graph
+      </button>
+      <button
+        onClick={() => setSelected({ type: "graph-properties" })}
+        className="navbar-btn"
+      >
+        Process graph
       </button>
     </NavbarEl>
   );
