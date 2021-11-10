@@ -32,8 +32,9 @@ function GraphOptions() {
     <GraphOptionsEl>
       <h3>Add a graph</h3>
       <form>
-        <p>Graph Input Type</p>
-        <div className="graph-input-select" onChange={setGraphInputType}>
+        <p>Insert Adjacency Matrix</p>
+        {/* <div></div> */}
+        {/* <div className="graph-input-select" onChange={setGraphInputType}>
           <input
             type="radio"
             defaultChecked
@@ -49,13 +50,14 @@ function GraphOptions() {
             value="EDGE"
           />
           <label htmlFor="graph-option-edges">Edges</label>
-        </div>
+        </div> */}
         <textarea
           rows="4"
           name="graph-input"
           value={input}
           onChange={handleChange}
         />
+        <br />
         <button type="submit" onClick={handleSubmit}>
           Add
         </button>

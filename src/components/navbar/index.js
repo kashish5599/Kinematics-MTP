@@ -30,7 +30,7 @@ function Navbar() {
         onClick={() => setSelected({ type: "graph-properties" })}
         className="navbar-btn"
       >
-        Process graph
+        View Cycles
       </button>
     </NavbarEl>
   );
