@@ -16,6 +16,9 @@ function Canvas() {
       height: canvasContainer.current.clientHeight,
       backgroundColor: lightGray,
       preserveObjectStacking: true,
+      nodeCount: 0,
+      edgeCount: 0,
+      edgeNodeMap: {},
     });
   }, [initCanvas]);
 

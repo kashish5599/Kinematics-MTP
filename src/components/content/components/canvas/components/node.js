@@ -1,3 +1,4 @@
+import { DIRECTED_EDGE } from "../../../../../data/config";
 import { gray } from "../../../../../elements/colorSchema";
 import { getRandomNumberInterval } from "../../../../../helpers/misc";
 import fabric from "../../../../../modules/fabric";
@@ -25,8 +26,9 @@ export const createNode = (canvas, { id, title }) => {
     type: "node",
     id,
     text: title,
-    edges: [], //Each edge -> {nodeId: "", line: lineData}
+    edges: [], //Each edge -> {origin: "", target: "", type: "", line: lineData}
     incomingEdges: [],
+    isGrounded: false,
     controls: false,
   });
 
@@ -49,31 +51,30 @@ export const createNode = (canvas, { id, title }) => {
   return grp;
 };
 
-export const updateNodeData = (canvas, data = {}) => {
+//actions - PROPERTY_CHANGE, MOVE, SELECTION, ADD_EDGE
+export const updateNodeData = (action, { canvas, ...data }) => {
   const node = data?.node || canvas.getActiveObject();
 
-  switch (Object.keys(data)[0]) {
-    case "text":
+  switch (action) {
+    case "PROPERTY_CHANGE":
       node.item(1).set(data);
       node.set(data);
       return;
-    case "move":
-      moveEdge(node);
+    case "MOVE":
+      moveEdge(canvas, node);
       canvas.renderAll();
       return;
-    case "edge":
+    case "ADD_EDGE":
       const edge = createEdge(canvas, data);
-      node.edges.push({ nodeId: data.edge, type: data.type, line: edge });
-      const node2 = canvas.getObjects().find(({ id }) => id === data.edge);
-      node2.incomingEdges.push({
-        nodeId: node.id,
-        type: data.type,
-        line: edge,
+      canvas.getObjects("node").forEach(({ id, ...node }) => {
+        if (id === data.target || id === data.source) {
+          node.edges.push(edge.id);
+        }
       });
-      canvas.fire("custom:update", node);
       canvas.add(edge).sendToBack(edge).renderAll();
+      canvas.fire("custom:update", node);
       return;
-    case "selected":
+    case "SELECTION":
       node.item(0).set({ fill: data.selected ? "red" : gray });
       canvas.renderAll();
       return;

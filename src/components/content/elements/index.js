@@ -23,3 +23,5 @@ export const SidebarEl = styled.div`
 export const GraphOptionsEl = styled.div``;
 
 export const GraphPropertiesEl = styled.div``;
+
+export const EquationsEl = styled.div``;

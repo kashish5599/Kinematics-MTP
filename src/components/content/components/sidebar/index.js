@@ -1,9 +1,10 @@
 import React from "react";
 import CanvasStore from "../../../../stores/canvasStore";
 import { SidebarEl } from "../../elements";
+import Equations from "./components/equations";
 import GraphOptions from "./components/graphOptions";
 import GraphProperties from "./components/graphProperties";
-import NodeOptions from "./components/nodeOptions";
+import Node from "./components/node";
 
 function Sidebar() {
   const { selected } = CanvasStore.useContainer();
@@ -14,11 +15,13 @@ function Sidebar() {
         ? (() => {
             switch (selected.type) {
               case "node":
-                return <NodeOptions />;
+                return <Node />;
               case "graph":
                 return <GraphOptions />;
               case "graph-properties":
                 return <GraphProperties />;
+              case "equations":
+                return <Equations />;
               default:
                 return <div>Error</div>;
             }
