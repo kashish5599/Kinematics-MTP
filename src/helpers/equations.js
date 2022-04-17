@@ -42,6 +42,6 @@ export const getEquations = (canvas) => {
     }
     eqs.push(e);
   });
-
+  console.log(valuesMap, numberingMap);
   return eqs;
 };

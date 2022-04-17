@@ -25,7 +25,7 @@ function Equations() {
             let e = "";
             eq.forEach(({ title, sign }, i) => {
               if (i !== 0 || sign === "-") e = e.concat(`${sign} `);
-              e = e.concat(`l_${title}e^(theta_${title}) `);
+              e = e.concat(`l_${title}e^(itheta_${title}) `);
             });
             e = e.concat(`= 0`);
             console.log(e);
