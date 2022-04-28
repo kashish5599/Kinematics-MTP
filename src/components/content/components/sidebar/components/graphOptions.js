@@ -12,11 +12,11 @@ function GraphOptions() {
     setInput(e.target.value);
   };
 
-  const setGraphInputType = (e) => {
-    //TO DO: Change current input to diff form
-    setInput("");
-    setInputType(e.target.value);
-  };
+  // const setGraphInputType = (e) => {
+  //   //TO DO: Change current input to diff form
+  //   setInput("");
+  //   setInputType(e.target.value);
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();

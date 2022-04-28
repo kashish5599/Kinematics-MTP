@@ -1,19 +1,15 @@
 import { setEdgeAngles } from "../components/content/components/canvas/components/edge";
 import { getCycles } from "./graph";
-import { calculateEdgeLength, getEdge, getNodeNumber, getNodes } from "./misc";
+import { decimalRoundOff } from "./math";
+import { getEdge } from "./misc";
 
 //return Eq = {A: [](1xn), B[]((nx1))}
 //all equations = A.B
 export const getEquations = (canvas) => {
-  let eq = { A: [], B: [] };
-  const an = getNodes(canvas);
-  const gn = an
-    .filter(({ isGrounded }) => isGrounded)
-    .map(({ id }) => getNodeNumber(id) - 1);
   setEdgeAngles(canvas);
   console.log(canvas);
   // Loop to generate eq matrix.
-  const { fm, cycles } = getCycles(canvas);
+  const { cycles } = getCycles(canvas);
   // console.log(fm);
 
   let numberingMap = {};
@@ -44,4 +40,22 @@ export const getEquations = (canvas) => {
   });
   console.log(valuesMap, numberingMap);
   return eqs;
+};
+
+export const getEquationCoeffValues = (equations, type) => {
+  let uniq = [];
+  return equations.flat().reduce((result, { title, ...eq }) => {
+    if (
+      uniq.includes(title) ||
+      uniq.includes(title.split("-").reverse().join("-"))
+    )
+      return result;
+    uniq.push(title);
+    result.push({
+      title,
+      type,
+      value: decimalRoundOff(eq[type]),
+    });
+    return result;
+  }, []);
 };

@@ -3,7 +3,7 @@ import CanvasStore from "../../stores/canvasStore";
 import { NavbarEl } from "./elements/index";
 
 function Navbar() {
-  const { isCanvasActive, addNode, setSelected, generateEquations } =
+  const { isCanvasActive, addNode, setSelected, generateEquations, canvas } =
     CanvasStore.useContainer();
   return (
     <NavbarEl>
@@ -19,7 +19,8 @@ function Navbar() {
       <button
         onClick={() =>
           isCanvasActive
-            ? setSelected({ type: "graph" })
+            ? canvas.discardActiveObject().renderAll() &&
+              setSelected({ type: "graph" })
             : console.error("Canvas not loaded")
         }
         className="navbar-btn"
@@ -28,7 +29,10 @@ function Navbar() {
         Add Graph
       </button>
       <button
-        onClick={() => setSelected({ type: "graph-properties" })}
+        onClick={() => {
+          canvas.discardActiveObject().renderAll();
+          setSelected({ type: "graph-properties" });
+        }}
         className="navbar-btn"
       >
         View Cycles

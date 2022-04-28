@@ -95,7 +95,6 @@ export const getCycles = (canvas) => {
   const fm = fundamentalMatrix(canvas);
   let cycles = [];
   let B = [];
-  const EDGE = canvas.edgeCount;
 
   if (fm.length === 1) {
     return { fm, cycles: fm };

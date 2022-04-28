@@ -24,4 +24,4 @@ export const GraphOptionsEl = styled.div``;
 
 export const GraphPropertiesEl = styled.div``;
 
-export const EquationsEl = styled.div``;
+export const EquationsEl = styled.ul``;

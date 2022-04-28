@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { UNDIRECTED_EDGE } from "../../../../../../data/config";
 import CanvasStore from "../../../../../../stores/canvasStore";
 import Edges from "./components/edges";
 import NodeInfo from "./components/info";
@@ -11,8 +10,12 @@ function NodeOptions() {
 
   const handleChange = (e) => {
     let update;
-    if (e.target.type === "checkbox") {
-      update = { [e.target.name]: e.target.checked };
+    if (e.target.name === "isGrounded") {
+      update = {
+        [e.target.name]: e.target.checked,
+        lockMovementX: e.target.checked,
+        lockMovementY: e.target.checked,
+      };
     } else {
       update = { [e.target.name]: e.target.value };
     }
@@ -27,6 +30,7 @@ function NodeOptions() {
 
   //Create list of nodes not connected to current
   useEffect(() => {
+    console.log(canvas);
     setOtherNodes(
       canvas
         .getObjects("node")

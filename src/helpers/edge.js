@@ -27,3 +27,7 @@ export const getEdgeFromNN = (canvas, n1, n2) => {
 export const getEdgeLength = ({ x1, x2, y1, y2 }) => {
   return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 };
+
+export const getEdgeLengthFromNN = (canvas, n1, n2) => {
+  return getEdgeLength(getEdgeFromNN(canvas, n1, n2));
+};

@@ -1,6 +1,5 @@
 import { DIRECTED_EDGE, UNDIRECTED_EDGE } from "../../../../../data/config";
 import { getEdgeAngle } from "../../../../../helpers/edge";
-import { getAdjacencyMatrix } from "../../../../../helpers/graph";
 import fabric from "../../../../../modules/fabric";
 
 export const createEdge = (canvas, { target, source, type, title, id }) => {

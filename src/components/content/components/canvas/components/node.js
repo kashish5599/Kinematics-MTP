@@ -1,4 +1,3 @@
-import { DIRECTED_EDGE } from "../../../../../data/config";
 import { gray } from "../../../../../elements/colorSchema";
 import { getRandomNumberInterval } from "../../../../../helpers/misc";
 import fabric from "../../../../../modules/fabric";

@@ -131,6 +131,7 @@ const CanvasStore = createContainer(() => {
   }, [canvas]);
 
   const generateEquations = useCallback(() => {
+    canvas.discardActiveObject().renderAll();
     const groundNodes = canvas
       .getObjects()
       .filter(({ type, isGrounded }) => type === "node" && isGrounded);
